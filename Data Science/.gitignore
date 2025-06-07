@@ -4,7 +4,6 @@
 # Ignore common data file formats
 *.xlsx
 *.xls
-*.json
 *.parquet
 
 # Ignore log files
