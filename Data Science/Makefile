@@ -131,7 +131,7 @@ run-fusion:
 	docker exec -it $(POSTGRES_CONTAINER) psql -U $(DB_USER) -d $(DB_NAME) -f $(SCRIPTS_PATH)/fusion.sql
 	@echo "$(GREEN)fusion.sql exécuté!$(NC)"
 
-run-all-scripts: run-sql run-auto run-item run-customers
+run-all-scripts: run-sql run-auto run-item run-customers run-remove_duplicates run-fusion
 	@echo "$(GREEN)Tous les scripts ont été exécutés!$(NC)"
 
 # Development utilities
@@ -142,6 +142,41 @@ shell-postgres:
 shell-pgadmin:
 	@echo "$(YELLOW)Ouverture du shell dans le conteneur PgAdmin...$(NC)"
 	docker exec -it $(POSTGRES_CONTAINER) /bin/bash
+
+# display graphs
+
+display-help:
+	@echo "$(BLUE)Graphiques disponibles:$(NC)"
+	@echo "  $(GREEN)display-pie$(NC)       - Afficher le graphique en secteurs"
+	@echo "  $(GREEN)display-chart$(NC)     - Afficher le graphique des graphiques"
+	@echo "  $(GREEN)display-mustache$(NC)  - Afficher le graphique en moustaches"
+	@echo "  $(GREEN)display-building$(NC)  - Afficher le graphique en barres"
+	@echo "  $(GREEN)display-elbow$(NC)     - Afficher le graphique en courbes"
+	@echo "  $(GREEN)display-clustering$(NC) - Afficher le graphique de clustering"
+
+display-pie:
+	@echo "$(YELLOW)Affichage du graphique en secteurs...$(NC)"
+	python3 ./graphs/pie.py
+
+display-chart:
+	@echo "$(YELLOW)Affichage du graphique des graphique...$(NC)"
+	python3 ./graphs/chart.py
+
+display-mustache:
+	@echo "$(YELLOW)Affichage du graphique en moustaches...$(NC)"
+	python3 ./graphs/mustache.py
+
+display-building:
+	@echo "$(YELLOW)Affichage du graphique en barres...$(NC)"
+	python3 ./graphs/Building.py
+
+display-elbow:
+	@echo "$(YELLOW)Affichage du graphique en courbes...$(NC)"
+	python3 ./graphs/elbow.py
+
+display-clustering:
+	@echo "$(YELLOW)Affichage du graphique de clustering...$(NC)"
+	python3 ./graphs/Clustering.py
 
 # Cleanup
 clean:

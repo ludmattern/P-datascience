@@ -21,7 +21,6 @@ BEGIN
     
     RAISE NOTICE 'Found % duplicate rows to be deleted', deleted_rows;
 
-    -- Delete duplicates
     DELETE FROM customers c
     USING (
         SELECT 
