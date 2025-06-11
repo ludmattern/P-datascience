@@ -6,7 +6,7 @@ from sklearn.preprocessing import MinMaxScaler
 def main():
     """Normalise les données Train et affiche le scatter plot Empowered vs Prescience"""
     try:
-        df = pd.read_csv("../data/Test_knight.csv")
+        df = pd.read_csv("../data/Train_knight.csv")
     except FileNotFoundError:
         return
 
